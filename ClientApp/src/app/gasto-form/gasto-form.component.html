@@ -1,0 +1,75 @@
+<form [formGroup]="formGastos" class="gastos-form form-horizontal mb-3" (ngSubmit)="guardarPago()">
+    <fieldset>
+
+        <div class="form-group">
+            <label for="description" class="col-md-2-control-label">Descripcion</label>
+            <div class="col-md-8">
+                <input class="form-control" id="description" type="text" formControlName="description" placeholder="Ingrese una descripcion"/>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="fecha" class="col-md-2-control-label">Categoria</label>
+            <div class="col-md-8">
+                <select formControlName="categoria" class="form-control" required (change)="categoriaChange()">  
+                    <option *ngFor="let categoria of categorias" [ngValue]="categoria" >
+                        {{categoria}}
+                    </option>
+                    <option *ngIf="createGasto" [ngValue]="null" [selected] disabled hidden>
+                        Seleccione una categoria
+                    </option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group createNewCategory" [ngClass]="{'newCategory': nuevaCategoria , 'noNewCategory': !nuevaCategoria}">
+            <label for="date" class="col-md-2-control-label">Nueva categoria</label>
+            <div class="col-md-8">
+                <input class="form-control" id="nuevaCategoria" type="text" formControlName="nuevaCategoria" 
+                placeholder="Ingrese la nueva categoria" required/>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="date" class="col-md-2-control-label">Fecha (DD/MM/YY)</label>
+            <div class="col-md-8">
+                <input class="form-control" id="date" type="text" formControlName="date" placeholder="Ingrese una fecha" required/>
+            </div>
+        </div>
+
+        <div class="form-group gastos-checkboxes">
+            <div class="form-check">
+                <input class="form-check-input" formControlName="pagado" type="checkbox" value="true" id="pagado" required >
+                <label class="form-check-label" >
+                    Esta pagado?
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" formControlName="compartido" [value]="true" type="checkbox" value="true" required
+                    id="compartido">
+                <label class="form-check-label" >
+                    El pago fue o sera compartido?
+                </label>
+            </div>
+        </div>
+
+        <div [ngClass]="{'activeField': formGastos.value.compartido , 'disabledField': !formGastos.value.compartido}" class="form-group">
+            <label for="compartidoEntre" class="col-md-2-control-label">Compartido entre</label>
+            <div class="col-md-8">
+                <input class="form-control" id="compartidoEntre" type="number" max="100" min="0" required
+                    formControlName="compartidoEntre" placeholder=" {{formGastos.value.compartido ? 'Ingrese entre cuantas personas se comparte el gasto' : ''}}" 
+                    [attr.disabled]="!formGastos.value.compartido ? 'disabled' : null" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="compartidoEntre" class="col-md-2-control-label">Precio</label>
+            <div class="col-md-8">
+                <input class="form-control" id="price" type="number" min="0" formControlName="price" placeholder="Ingrese el precio" required/>
+            </div>
+        </div>
+
+        <button type="submit" class="btn" [ngClass]="{'btn-danger': invalid , 'btn-primary': !invalid}">Guardar</button>
+        <p *ngIf="invalid" class="mt-2" style="color: red;">Informacion invalida, por favor chequea los campos</p>
+    </fieldset>
+</form>

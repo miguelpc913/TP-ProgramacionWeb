@@ -1,0 +1,46 @@
+.gastos-checkboxes{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.gastos-checkboxes .form-check{
+    margin: 20px;
+    margin-left: 0;
+}
+
+.form-control option , select.form-control {
+    text-transform: capitalize;
+}
+
+input.form-control:disabled#compartidoEntre{
+    color: rgba(0, 0, 0, 0);
+}
+
+.createNewCategory{
+    height: 0;
+    opacity: 0;
+
+}
+
+.newCategory{
+    transform: scaleY(1);
+    height: auto;
+    opacity: 1;
+    transform-origin: left top;
+    animation: .5s 1 normal slideDown;
+}
+
+@keyframes slideDown {
+    from {
+        height: 0;
+        opacity: 0;
+        transform: scaleY(0);
+    }
+  
+    to {
+        height: auto;
+        opacity: 1;
+        transform: scaleY(1);
+    }
+  }
+  

@@ -1,0 +1,28 @@
+<div class="row">
+    <p class="col-6 text-success" [ngStyle]="{'display:none;': gastoTotal === 0}"> Gastos totales: {{ gastoTotal |
+        currency:'$' }}</p>
+    <p class="col-6 text-danger" style="text-align: right;" [ngStyle]="{'display:none;': deudaTotal === 0}">Debes pagar:
+        {{ deudaTotal | currency:'$' }}</p>
+</div>
+
+<div class="form-group">
+    <input class="form-control" placeholder="Buscar por descripcion" [(ngModel)]="busquedaDescripcion"
+        name="campobuscado" (change)="Busqueda()" />
+    <label for="fecha" class="col-md-2-control-label">Filtrar por categoria</label>
+    <div class="col-md-8 category-search">
+        <select class="form-control" required (change)="Busqueda()" [(ngModel)]=busquedaCategoria>
+            <option *ngFor="let categoria of categorias" [ngValue]="categoria">
+                {{categoria}}
+            </option>
+            <option [selected] disabled hidden>
+                Seleccione una categoria
+            </option>
+        </select>
+    </div>
+</div>
+
+<p *ngIf="filtrado && gastos.length === 0">No se encontran gastos con esas caracteristicas</p>
+<p *ngIf="!filtrado && gastos.length === 0">Actualmente no hay gastos</p>
+<app-gasto-item *ngFor="let gasto of gastos" [gasto]="gasto" (borrarGasto)="BorrarGasto($event)"
+    (editarGasto)="EditarGasto($event)">
+</app-gasto-item>

@@ -1,0 +1,7 @@
+.category-search{
+    padding-left: 0;
+}
+
+.category-search option , .category-search select{
+    text-transform: capitalize;
+}

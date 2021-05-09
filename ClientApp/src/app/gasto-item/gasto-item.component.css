@@ -1,0 +1,68 @@
+
+.tooltip {
+    text-align: center;
+    padding: 5px;
+    border-radius: 6px;
+    bottom: 30px;
+    left: 0;
+    position: absolute;
+    z-index: 1;
+    background: white;
+    box-shadow: 0px 5px 15px 0px rgba(0,0,0,0.3);
+      
+  }
+
+  .tooltip__arrow {
+    width: 50px;
+    height: 25px;
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    overflow: hidden;
+  }
+    
+    .tooltip__arrow::after {
+     content: "";
+     position: absolute;
+     width: 7px;
+     height: 7px;
+     background: white;
+     transform: translateX(-50%) translateY(-50%) rotate(45deg);
+     top: 0;
+     left: 50%;
+     box-shadow: 1px 1px 20px 0px rgba(0,0,0,0.6);
+    }
+  
+  .gasto-icon:hover .tooltip{
+    opacity: 1;
+  }
+
+.disabledForm{
+    opacity: 0;
+    height: 0;
+}
+
+
+.activeForm{
+    transform: scaleY(1);
+    height: auto;
+    opacity: 1;
+    transform-origin: left top;
+    animation: .5s 1 normal slideDown;
+}
+
+@keyframes slideDown {
+    from {
+        height: 0;
+        opacity: 0;
+        transform: scaleY(0);
+    }
+  
+    to {
+        height: auto;
+        opacity: 1;
+        transform: scaleY(1);
+    }
+  }
+  
